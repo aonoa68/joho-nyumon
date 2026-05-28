@@ -1,0 +1,17 @@
+# MkDocs build output（gh-deploy が自動生成するので不要）
+site/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# エディタ
+.vscode/
+.idea/
+*.swp
