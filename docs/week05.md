@@ -205,3 +205,7 @@ Excel①（数値データ）
 ```
 
 ---
+
+## 関連リンク・音声解説
+
+- [NotebookLM 音声解説（第5回）](https://notebooklm.google.com/notebook/f4efed17-3133-4884-a7be-fee67d0784f2)

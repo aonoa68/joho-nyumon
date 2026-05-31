@@ -281,3 +281,9 @@ Excelで使う理由
 に圧縮しています。
 
 ---
+
+## 関連リンク・音声解説
+
+- [NotebookLM 音声解説（Excelによるデータ読解と記述統計）](https://notebooklm.google.com/notebook/d366a546-38ce-482f-935c-1619d637b381)
+- [記述統計と推測統計（YouTube）](https://youtu.be/u4tACq_ml2k?si=qpiopLRkmH1HLOmV)
+- [理解度チェック（Googleフォーム）](https://docs.google.com/forms/d/e/1FAIpQLSeFgwcaEfAfklqZqPSrl_VPABgF3fufgRFhfuc8YJ4JfC3Ccg/viewform)

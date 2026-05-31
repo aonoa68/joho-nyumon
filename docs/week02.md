@@ -201,3 +201,7 @@
 * 第2回：安定させる
 
 ---
+
+## 関連リンク・音声解説
+
+- [NotebookLM 音声解説（第2回）](https://notebooklm.google.com/notebook/ae1cb545-5e69-46ee-81eb-bad279011b28)

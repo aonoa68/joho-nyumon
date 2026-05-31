@@ -125,3 +125,9 @@ PwC Japanが日米比較で指摘していることです。
 
 - PwC Japan「生成AIに関する実態調査2024 春 米国との比較」
   https://www.pwc.com/jp/ja/knowledge/thoughtleadership/generative-ai-survey2024-us-comparison.html
+
+---
+
+## 関連リンク・音声解説
+
+- [NotebookLM 音声解説（日米の賃金格差）](https://notebooklm.google.com/notebook/63ecd39b-68e9-4b8b-9fab-dbbc8075666c)

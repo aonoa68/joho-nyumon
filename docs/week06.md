@@ -223,3 +223,7 @@ Excel = データ処理の入口
 ```
 
 ---
+
+## 関連リンク・音声解説
+
+- [NotebookLM 音声解説（第6回）](https://notebooklm.google.com/notebook/ec36be2f-f0c3-445a-8bc0-fd013f161dee)
