@@ -14,6 +14,22 @@
 
 ---
 
+## 🎧 音声で聞く（NotebookLM）
+
+各回の内容を、AI が対話形式の音声で解説します。**通学中などに「聞いて」復習**できます。
+
+| 回 | 音声解説（NotebookLM） |
+|:---:|---|
+| 第1回 | [授業のはじめに](https://notebooklm.google.com/notebook/b14b8b8b-d6b0-4716-af6a-3992c82b0506) |
+| 第2回 | [メール・タイピング](https://notebooklm.google.com/notebook/ae1cb545-5e69-46ee-81eb-bad279011b28) |
+| 第3回 | [ファイル操作](https://notebooklm.google.com/notebook/48276e0b-098e-4294-835f-a30341f8236f) |
+| 第4回 | [Word：文章の構造](https://notebooklm.google.com/notebook/08dafeba-418d-4985-bb72-1fcb578e1cbe) |
+| 第5回 | [Word：図表の活用](https://notebooklm.google.com/notebook/f4efed17-3133-4884-a7be-fee67d0784f2) ／ [AI画像生成の注意](https://notebooklm.google.com/notebook/e781e24e-8647-492e-8c0d-48879dbdc1e4) |
+| 第6回 | [Excel：データ入力](https://notebooklm.google.com/notebook/ec36be2f-f0c3-445a-8bc0-fd013f161dee) ／ [日米の賃金格差](https://notebooklm.google.com/notebook/63ecd39b-68e9-4b8b-9fab-dbbc8075666c) |
+| 第7回 | [データ読解と記述統計](https://notebooklm.google.com/notebook/d366a546-38ce-482f-935c-1619d637b381) ／ [情報の作法はいつ更新されるか](https://notebooklm.google.com/notebook/3efc2e93-c569-4fef-b11a-68bc09f63554) |
+
+---
+
 ## 各回の資料
 
 | 回 | テーマ | 資料 |
