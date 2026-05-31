@@ -20,7 +20,7 @@
 |:---:|---|---|
 | 第2回 | メール・タイピング | [授業資料](week02.md) |
 | 第3回 | ファイル操作 | [授業資料](week03.md) |
-| 第4回 | Word：文章の構造 | [授業資料](week04.md) |
+| 第4回 | Word：文章の構造 | [授業資料](week04.md) ／ [GPT Realtime Translate](week04-gpt-translate.md) |
 | 第5回 | Word：図表の活用 | [授業資料](week05.md) ／ [AI画像生成の注意](week05-ai-image.md) |
 | 第6回 | Excel：データ入力 | [授業資料](week06.md) ／ [AIで日米の賃金格差は埋まるか](week06-ai-wage.md) |
 | 第7回 | データの読み方 | [授業資料](week07.md) ／ [情報の作法はいつ更新されるか](week07-info-norms.md) |
