@@ -202,6 +202,6 @@
 
 ---
 
-## 関連リンク・音声解説
+## 関連リンク・復習教材
 
-- [NotebookLM 音声解説（第2回）](https://notebooklm.google.com/notebook/ae1cb545-5e69-46ee-81eb-bad279011b28)
+- [NotebookLM スライド・動画・クイズ（第2回）](https://notebooklm.google.com/notebook/ae1cb545-5e69-46ee-81eb-bad279011b28)

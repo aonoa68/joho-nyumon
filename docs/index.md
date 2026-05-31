@@ -14,11 +14,11 @@
 
 ---
 
-## 🎧 音声で聞く（NotebookLM）
+## 📚 NotebookLM で復習（スライド・動画・クイズ）
 
-各回の内容を、AI が対話形式の音声で解説します。**通学中などに「聞いて」復習**できます。
+各回の内容を、NotebookLM の**スライド・動画・クイズ**で復習できます。手を動かす前の予習にも、終わったあとの確認にも使えます。
 
-| 回 | 音声解説（NotebookLM） |
+| 回 | NotebookLM（スライド・動画・クイズ） |
 |:---:|---|
 | 第1回 | [授業のはじめに](https://notebooklm.google.com/notebook/b14b8b8b-d6b0-4716-af6a-3992c82b0506) |
 | 第2回 | [メール・タイピング](https://notebooklm.google.com/notebook/ae1cb545-5e69-46ee-81eb-bad279011b28) |

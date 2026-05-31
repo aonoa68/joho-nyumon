@@ -209,8 +209,8 @@ Word②（図表）
 
 ---
 
-## 関連リンク・音声解説
+## 関連リンク・復習教材
 
-- [NotebookLM 音声解説（第4回）](https://notebooklm.google.com/notebook/08dafeba-418d-4985-bb72-1fcb578e1cbe)
+- [NotebookLM スライド・動画・クイズ（第4回）](https://notebooklm.google.com/notebook/08dafeba-418d-4985-bb72-1fcb578e1cbe)
 - [ChatGPTで何が出来るのか（Speakerdeck・dahatake氏）](https://speakerdeck.com/dahatake/qing-bao-gong-xue-zhuan-gong-nozhong-xue-sheng-gao-xiao-sheng-da-xue-sheng-zhuan-men-xue-xiao-sheng-xiang-ke-chatgpt-dehe-gachu-lai-runoka)
 - [GPT Realtime Translate（リアルタイム翻訳AI）](week04-gpt-translate.md)

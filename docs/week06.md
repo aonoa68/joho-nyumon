@@ -224,6 +224,6 @@ Excel = データ処理の入口
 
 ---
 
-## 関連リンク・音声解説
+## 関連リンク・復習教材
 
-- [NotebookLM 音声解説（第6回）](https://notebooklm.google.com/notebook/ec36be2f-f0c3-445a-8bc0-fd013f161dee)
+- [NotebookLM スライド・動画・クイズ（第6回）](https://notebooklm.google.com/notebook/ec36be2f-f0c3-445a-8bc0-fd013f161dee)

@@ -71,6 +71,6 @@
 
 ---
 
-## 関連リンク・音声解説
+## 関連リンク・復習教材
 
-- [NotebookLM 音声解説（AI画像生成の注意点）](https://notebooklm.google.com/notebook/e781e24e-8647-492e-8c0d-48879dbdc1e4)
+- [NotebookLM スライド・動画・クイズ（AI画像生成の注意点）](https://notebooklm.google.com/notebook/e781e24e-8647-492e-8c0d-48879dbdc1e4)

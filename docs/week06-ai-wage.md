@@ -128,6 +128,6 @@ PwC Japanが日米比較で指摘していることです。
 
 ---
 
-## 関連リンク・音声解説
+## 関連リンク・復習教材
 
-- [NotebookLM 音声解説（日米の賃金格差）](https://notebooklm.google.com/notebook/63ecd39b-68e9-4b8b-9fab-dbbc8075666c)
+- [NotebookLM スライド・動画・クイズ（日米の賃金格差）](https://notebooklm.google.com/notebook/63ecd39b-68e9-4b8b-9fab-dbbc8075666c)

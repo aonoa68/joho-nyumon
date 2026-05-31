@@ -226,6 +226,6 @@ Word（文章構造）
 
 ---
 
-## 関連リンク・音声解説
+## 関連リンク・復習教材
 
-- [NotebookLM 音声解説（第3回）](https://notebooklm.google.com/notebook/48276e0b-098e-4294-835f-a30341f8236f)
+- [NotebookLM スライド・動画・クイズ（第3回）](https://notebooklm.google.com/notebook/48276e0b-098e-4294-835f-a30341f8236f)
