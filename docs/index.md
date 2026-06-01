@@ -27,6 +27,7 @@
 | 第5回 | [Word：図表の活用](https://notebooklm.google.com/notebook/f4efed17-3133-4884-a7be-fee67d0784f2) ／ [AI画像生成の注意](https://notebooklm.google.com/notebook/e781e24e-8647-492e-8c0d-48879dbdc1e4) |
 | 第6回 | [Excel：データ入力](https://notebooklm.google.com/notebook/ec36be2f-f0c3-445a-8bc0-fd013f161dee) ／ [日米の賃金格差](https://notebooklm.google.com/notebook/63ecd39b-68e9-4b8b-9fab-dbbc8075666c) |
 | 第7回 | [データ読解と記述統計](https://notebooklm.google.com/notebook/d366a546-38ce-482f-935c-1619d637b381) ／ [情報の作法はいつ更新されるか](https://notebooklm.google.com/notebook/3efc2e93-c569-4fef-b11a-68bc09f63554) |
+| 第8回 | [WebとHTML・アンケート設計](https://notebooklm.google.com/notebook/e85074f4-f8ad-440f-83bf-a6c834237a4a) |
 
 ---
 
