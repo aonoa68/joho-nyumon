@@ -28,6 +28,7 @@
 | 第6回 | [Excel：データ入力](https://notebooklm.google.com/notebook/ec36be2f-f0c3-445a-8bc0-fd013f161dee) ／ [日米の賃金格差](https://notebooklm.google.com/notebook/63ecd39b-68e9-4b8b-9fab-dbbc8075666c) |
 | 第7回 | [データ読解と記述統計](https://notebooklm.google.com/notebook/d366a546-38ce-482f-935c-1619d637b381) ／ [情報の作法はいつ更新されるか](https://notebooklm.google.com/notebook/3efc2e93-c569-4fef-b11a-68bc09f63554) |
 | 第8回 | [WebとHTML・アンケート設計](https://notebooklm.google.com/notebook/e85074f4-f8ad-440f-83bf-a6c834237a4a) |
+| 第9回 | [Excelと本の山（余談）](https://notebooklm.google.com/notebook/2819d253-1307-4ce7-bdce-d8df3be0da64) |
 
 ---
 
@@ -42,7 +43,7 @@
 | 第6回 | Excel：データ入力 | [授業資料](week06.md) ／ [AIで日米の賃金格差は埋まるか](week06-ai-wage.md) |
 | 第7回 | データの読み方 | [授業資料](week07.md) ／ [情報の作法はいつ更新されるか](week07-info-norms.md) |
 | 第8回 | アンケート設計 | [余談：WebとHTML](week08-web-html.md) ／ [Colab演習ノート](https://colab.research.google.com/drive/1GSgHtj9yiGqYRclslQMWlQsNGMQ52ild?usp=sharing) |
-| 第9回 | データ整理・集計 | [授業資料](week09.md) |
+| 第9回 | データ整理・集計 | [授業資料](week09.md) ／ [余談：Excelと本の山](week09-honnoyama.md) |
 | 第10回 | データ可視化 | [授業資料](week10.md) |
 | 第12回 | 分析課題 | [授業資料](week12.md) |
 | 第13回 | 最終レポート | [授業資料](week13.md) |
