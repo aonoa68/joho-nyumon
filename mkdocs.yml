@@ -62,6 +62,7 @@ nav:
   - 授業の基本:
       - 授業のルール: rules.md
       - 各回の課題一覧: assignments.md
+      - AIで確認（検証）する方法: ai-verify.md
   - 各回の資料:
       - 第2回 メール・タイピング: week02.md
       - 第3回 ファイル操作: week03.md

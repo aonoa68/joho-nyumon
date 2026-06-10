@@ -55,6 +55,7 @@
 
 - [授業のルール](rules.md)
 - [各回の課題一覧](assignments.md)（[PDF版](files/assignments-all.pdf)）
+- [AIで「確認（検証）」する方法](ai-verify.md)（第9・10回 共通）
 
 ---
 
