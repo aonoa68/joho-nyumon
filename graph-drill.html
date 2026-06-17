@@ -103,7 +103,7 @@
 <body>
 <div class="container">
   <h1>グラフ選択ドリル</h1>
-  <p class="subtitle">パート1: 棒グラフ か ヒストグラム か　／　パート2: どちらのグラフが正しいか</p>
+  <p class="subtitle">パート1: 棒グラフ か ヒストグラム か　／　パート2: どちらのグラフが正しいか（NG判定）</p>
 
   <div class="progress-bar">
     <div class="progress-fill" id="progressFill" style="width:0%"></div>
@@ -197,6 +197,65 @@ function barChart(cfg) {
   });
 
   s += `</svg>`;
+  return s;
+}
+
+// ─── Line chart generator ────────────────────────────────────────────────────
+function lineChart({title='', yMin=4, yMax=10, values=[], w=155, h=125}) {
+  const pT=title?26:10, pL=30, pR=8, pB=26;
+  const cX=pL, cY=pT, cW=w-pL-pR, cH=h-pT-pB, cB=cY+cH;
+  const yRange=yMax-yMin, n=values.length;
+  const xStep=n>1?cW/(n-1):0;
+  const px=i=>cX+i*xStep;
+  const py=v=>cB-((v-yMin)/yRange)*cH;
+  const ff="Hiragino Kaku Gothic ProN,Meiryo,sans-serif";
+  let s=`<svg width="${w}" height="${h}" xmlns="http://www.w3.org/2000/svg">`;
+  s+=`<rect width="${w}" height="${h}" fill="#f8f9fa" rx="6" stroke="#e0e0e0" stroke-width="0.5"/>`;
+  if(title) s+=`<text x="${w/2}" y="17" text-anchor="middle" font-size="8" fill="#222" font-weight="bold" font-family="${ff}">${title}</text>`;
+  s+=`<line x1="${cX}" y1="${cY}" x2="${cX}" y2="${cB}" stroke="#888" stroke-width="1"/>`;
+  s+=`<line x1="${cX}" y1="${cB}" x2="${cX+cW}" y2="${cB}" stroke="#888" stroke-width="1"/>`;
+  for(let i=0;i<=4;i++){
+    const val=yMin+yRange*i/4, y=cB-cH*i/4;
+    s+=`<line x1="${cX}" y1="${y}" x2="${cX+cW}" y2="${y}" stroke="#e0e0e0" stroke-width="0.5"/>`;
+    s+=`<line x1="${cX-3}" y1="${y}" x2="${cX}" y2="${y}" stroke="#888" stroke-width="1"/>`;
+    s+=`<text x="${cX-4}" y="${y+3}" text-anchor="end" font-size="7" fill="#666" font-family="sans-serif">${Number.isInteger(val)?val:val.toFixed(1)}</text>`;
+  }
+  const pts=values.map((v,i)=>`${px(i).toFixed(1)},${py(v).toFixed(1)}`).join(' ');
+  s+=`<polyline points="${pts}" fill="none" stroke="#e74c3c" stroke-width="1.8" stroke-linejoin="round"/>`;
+  values.forEach((v,i)=>{s+=`<circle cx="${px(i).toFixed(1)}" cy="${py(v).toFixed(1)}" r="3" fill="#e74c3c"/>`;});
+  values.forEach((_,i)=>{
+    if(n<=8||i%3===0||i===n-1){
+      s+=`<text x="${px(i).toFixed(1)}" y="${cB+11}" text-anchor="middle" font-size="6" fill="#666" font-family="sans-serif">${String(i+1).padStart(2,'0')}</text>`;
+    }
+  });
+  s+=`<text x="${cX+cW/2}" y="${h-3}" text-anchor="middle" font-size="6.5" fill="#888" font-family="${ff}">回答ID</text>`;
+  s+=`</svg>`;
+  return s;
+}
+
+// ─── Pie chart generator ─────────────────────────────────────────────────────
+function pieChart({title='', slices=[], w=155, h=125}) {
+  const pT=title?26:10;
+  const cx=w/2, cy=pT+(h-pT-16)/2, r=Math.min((w-32)/2,(h-pT-16)/2);
+  const ff="Hiragino Kaku Gothic ProN,Meiryo,sans-serif";
+  let s=`<svg width="${w}" height="${h}" xmlns="http://www.w3.org/2000/svg">`;
+  s+=`<rect width="${w}" height="${h}" fill="#f8f9fa" rx="6" stroke="#e0e0e0" stroke-width="0.5"/>`;
+  if(title) s+=`<text x="${w/2}" y="17" text-anchor="middle" font-size="8" fill="#222" font-weight="bold" font-family="${ff}">${title}</text>`;
+  const total=slices.reduce((a,sl)=>a+sl.value,0);
+  let ang=-Math.PI/2;
+  slices.forEach(sl=>{
+    const sweep=(sl.value/total)*2*Math.PI, ea=ang+sweep;
+    const x1=(cx+r*Math.cos(ang)).toFixed(1), y1=(cy+r*Math.sin(ang)).toFixed(1);
+    const x2=(cx+r*Math.cos(ea)).toFixed(1),  y2=(cy+r*Math.sin(ea)).toFixed(1);
+    const large=sweep>Math.PI?1:0;
+    s+=`<path d="M ${cx} ${cy} L ${x1} ${y1} A ${r} ${r} 0 ${large} 1 ${x2} ${y2} Z" fill="${sl.color}" stroke="#fff" stroke-width="1.5"/>`;
+    const ma=ang+sweep/2;
+    const lx=(cx+r*0.62*Math.cos(ma)).toFixed(1), ly=(cy+r*0.62*Math.sin(ma)).toFixed(1);
+    s+=`<text x="${lx}" y="${(parseFloat(ly)-4).toFixed(1)}" text-anchor="middle" font-size="8" fill="#fff" font-weight="bold" font-family="${ff}">${sl.label}</text>`;
+    s+=`<text x="${lx}" y="${(parseFloat(ly)+7).toFixed(1)}" text-anchor="middle" font-size="8" fill="#fff" font-family="sans-serif">${((sl.value/total)*100).toFixed(0)}%</text>`;
+    ang=ea;
+  });
+  s+=`</svg>`;
   return s;
 }
 
@@ -297,13 +356,33 @@ const judgeQuestions = [
     reason: 'グラフBにはY軸のラベルがなく、数字の意味（何の単位か）がわかりません。「時間」「点」「円」など単位を示す軸ラベルは必須です。',
     leftCfg:  { title:'平均睡眠時間', yMin:0, yMax:8, values:[6.8,6.1], labels:['朝食あり','朝食なし'], gapped:true, yAxisLabel:'（時間）' },
     rightCfg: { title:'平均睡眠時間', yMin:0, yMax:8, values:[6.8,6.1], labels:['朝食あり','朝食なし'], gapped:true, yAxisLabel:'' }
+  },
+  {
+    type: 'judge',
+    questionText: '15人の睡眠時間を「回答ID順」にグラフにしました。どちらが適切ですか？',
+    scenario: "回答者15人分の睡眠時間（時間）のデータ（個人を識別するIDはランダムに振られた番号）",
+    answer: 'right',
+    ngPoint: '無関係な個人データを折れ線グラフで結んでいる',
+    reason: '折れ線グラフは「時間の流れによる変化（例：月別気温）」を表すものです。回答01さんと02さんは全くの別人なので、線で結んでも「上がった・下がった」という意味はありません。分布を見るにはヒストグラム、グループ比較には棒グラフを使いましょう。',
+    leftSvg: lineChart({title:'睡眠時間（回答ID順・折れ線）', yMin:4, yMax:10, values:[6.5,8.0,5.5,7.5,6.0,8.5,5.0,7.0,8.0,5.5,6.5,7.5,6.0,9.0,5.5]}),
+    rightSvg: barChart({title:'グループ別平均睡眠時間', yMin:0, yMax:8, values:[6.8,6.1], labels:['朝食あり','朝食なし'], gapped:true, yAxisLabel:'（時間）'})
+  },
+  {
+    type: 'judge',
+    questionText: '「朝食あり・なし別の平均睡眠時間」を表したグラフです。どちらが適切ですか？',
+    scenario: "朝食あり: 平均6.8時間、朝食なし: 平均6.1時間（各グループの平均値）",
+    answer: 'right',
+    ngPoint: '平均値を円グラフで表している',
+    reason: '円グラフは「全体を100%としたときの割合（内訳）」を表すものです。平均値を足しても「全体の何か」にはならないため、このグラフは意味をなしません。平均値の大きさを比較するには棒グラフを使います。',
+    leftSvg: pieChart({title:'睡眠時間（平均）の円グラフ', slices:[{label:'朝食あり',value:6.8,color:'#4361ee'},{label:'朝食なし',value:6.1,color:'#e85d4a'}]}),
+    rightSvg: barChart({title:'グループ別平均睡眠時間', yMin:0, yMax:8, values:[6.8,6.1], labels:['朝食あり','朝食なし'], gapped:true, yAxisLabel:'（時間）'})
   }
 ];
 
-// Precompute SVGs for judge questions
+// Precompute SVGs for judge questions (skip if already set e.g. lineChart/pieChart)
 judgeQuestions.forEach(q => {
-  q.leftSvg  = barChart(q.leftCfg);
-  q.rightSvg = barChart(q.rightCfg);
+  if (!q.leftSvg)  q.leftSvg  = barChart(q.leftCfg);
+  if (!q.rightSvg) q.rightSvg = barChart(q.rightCfg);
 });
 
 const allQuestions = [...choiceQuestions, ...judgeQuestions];
@@ -341,7 +420,7 @@ function showQuestion() {
   document.getElementById('feedback').style.display = 'none';
   document.getElementById('nextBtn').style.display = 'none';
   document.getElementById('hintText').textContent = isJudge
-    ? 'ヒント：タイトル・Y軸の始点・棒の隙間・軸ラベルに注目。'
+    ? 'ヒント：タイトル・Y軸の始点・棒の隙間・軸ラベル・グラフの種類（折れ線・円グラフの誤用）に注目。'
     : 'ヒント：X軸が「名前（カテゴリ）」なら棒グラフ。X軸が「数値の区間」ならヒストグラム。';
 
   if (isJudge) {
