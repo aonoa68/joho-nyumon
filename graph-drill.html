@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>グラフ選択ドリル</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+    background: #f5f5f5;
+    color: #222;
+    min-height: 100vh;
+    padding: 20px;
+  }
+  .container {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+  h1 {
+    font-size: 1.5rem;
+    margin-bottom: 6px;
+    color: #1a1a2e;
+  }
+  .subtitle {
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 24px;
+  }
+  .progress-bar {
+    background: #ddd;
+    border-radius: 4px;
+    height: 6px;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    background: #4361ee;
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.3s ease;
+  }
+  .card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 28px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    margin-bottom: 16px;
+  }
+  .question-num {
+    font-size: 0.75rem;
+    color: #888;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .question-text {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+  .scenario {
+    background: #f0f4ff;
+    border-left: 3px solid #4361ee;
+    padding: 10px 14px;
+    border-radius: 0 6px 6px 0;
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+  .choices {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .choice-btn {
+    border: 2px solid #ddd;
+    background: #fff;
+    border-radius: 8px;
+    padding: 18px 12px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.15s;
+    text-align: center;
+    font-family: inherit;
+  }
+  .choice-btn:hover:not(:disabled) {
+    border-color: #4361ee;
+    background: #f0f4ff;
+  }
+  .choice-btn.correct {
+    border-color: #2dc653;
+    background: #e8faf0;
+    color: #1a7a3a;
+    font-weight: bold;
+  }
+  .choice-btn.wrong {
+    border-color: #e74c3c;
+    background: #fdf0ef;
+    color: #c0392b;
+  }
+  .choice-btn.show-correct {
+    border-color: #2dc653;
+    background: #e8faf0;
+    color: #1a7a3a;
+    font-weight: bold;
+  }
+  .feedback {
+    margin-top: 16px;
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 0.92rem;
+    line-height: 1.6;
+    display: none;
+  }
+  .feedback.correct {
+    background: #e8faf0;
+    border: 1px solid #2dc653;
+    color: #1a5c30;
+  }
+  .feedback.wrong {
+    background: #fdf0ef;
+    border: 1px solid #e74c3c;
+    color: #7b1a1a;
+  }
+  .feedback .reason {
+    margin-top: 6px;
+    font-size: 0.88rem;
+    color: #555;
+  }
+  .nav-row {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 16px;
+  }
+  .next-btn {
+    background: #4361ee;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 28px;
+    font-size: 1rem;
+    cursor: pointer;
+    font-family: inherit;
+    display: none;
+  }
+  .next-btn:hover { background: #2c47cc; }
+
+  /* Result screen */
+  .result-screen {
+    display: none;
+    text-align: center;
+    padding: 40px 20px;
+  }
+  .score-big {
+    font-size: 4rem;
+    font-weight: bold;
+    color: #4361ee;
+  }
+  .score-label {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 24px;
+  }
+  .score-comment {
+    font-size: 1rem;
+    margin-bottom: 28px;
+    line-height: 1.7;
+    color: #333;
+  }
+  .retry-btn {
+    background: #4361ee;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 14px 36px;
+    font-size: 1rem;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .retry-btn:hover { background: #2c47cc; }
+
+  .hint {
+    font-size: 0.8rem;
+    color: #888;
+    margin-top: 16px;
+  }
+  .emoji { font-size: 1.4em; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>グラフ選択ドリル</h1>
+  <p class="subtitle">棒グラフ か ヒストグラム か、正しい方を選んでください。</p>
+
+  <div class="progress-bar">
+    <div class="progress-fill" id="progressFill" style="width:0%"></div>
+  </div>
+
+  <div class="card" id="quizCard">
+    <div class="question-num" id="questionNum"></div>
+    <div class="question-text">このデータを可視化するには？</div>
+    <div class="scenario" id="scenarioText"></div>
+    <div class="choices">
+      <button class="choice-btn" id="btn-bar" onclick="answer('bar')">
+        📊 棒グラフ<br>
+        <small style="color:#888;font-size:0.75rem">グループを比べる</small>
+      </button>
+      <button class="choice-btn" id="btn-hist" onclick="answer('hist')">
+        📈 ヒストグラム<br>
+        <small style="color:#888;font-size:0.75rem">分布を見る</small>
+      </button>
+    </div>
+    <div class="feedback" id="feedback"></div>
+    <div class="nav-row">
+      <button class="next-btn" id="nextBtn" onclick="nextQuestion()">次の問題 →</button>
+    </div>
+  </div>
+
+  <div class="hint">
+    ヒント：X軸が「名前（カテゴリ）」なら棒グラフ。X軸が「数値の区間」ならヒストグラム。
+  </div>
+
+  <div class="card result-screen" id="resultScreen">
+    <div class="score-big" id="scoreBig"></div>
+    <div class="score-label" id="scoreLabel"></div>
+    <div class="score-comment" id="scoreComment"></div>
+    <button class="retry-btn" onclick="restart()">もう一度やる</button>
+  </div>
+</div>
+
+<script>
+const questions = [
+  {
+    scenario: "朝食を食べる人と食べない人で、平均睡眠時間がどれだけ違うかを見たい。",
+    answer: "bar",
+    reason: "「朝食あり」「朝食なし」という2つのグループを比べるので棒グラフ。X軸はカテゴリ名。"
+  },
+  {
+    scenario: "クラス全員の睡眠時間が、5時間台・6時間台・7時間台のどこに集まっているかを見たい。",
+    answer: "hist",
+    reason: "数値の「分布」を見るのでヒストグラム。X軸は数値の区間（5時間台、6時間台…）。棒の間に隙間はない。"
+  },
+  {
+    scenario: "経済D・英文・社会の3クラスの平均点を比べたい。",
+    answer: "bar",
+    reason: "「経済D」「英文」「社会」というカテゴリを比較するので棒グラフ。"
+  },
+  {
+    scenario: "100人のテストの点数が、何点台に何人いるかを可視化したい。",
+    answer: "hist",
+    reason: "点数の分布を見るのでヒストグラム。区間（0〜10点、11〜20点…）で人数を見る。"
+  },
+  {
+    scenario: "男女別の平均身長を比べたい。",
+    answer: "bar",
+    reason: "「男性」「女性」というカテゴリの比較なので棒グラフ。"
+  },
+  {
+    scenario: "アンケートで集めた「一日のスマホ使用時間」が0〜1時間・1〜2時間・2〜3時間…のどこに多いかを見たい。",
+    answer: "hist",
+    reason: "連続した数値の分布を見るのでヒストグラム。使用時間という数値を区間に分けている。"
+  },
+  {
+    scenario: "Excelを使える人・使えない人・少し使える人の人数を棒で表したい。",
+    answer: "bar",
+    reason: "「使える」「使えない」「少し使える」はカテゴリなので棒グラフ。数値の連続性がないため隙間あり。"
+  },
+  {
+    scenario: "60人分の通学時間（分）のデータが、短い人・長い人にどう分布しているかを確認したい。",
+    answer: "hist",
+    reason: "通学時間という連続した数値の分布を見るのでヒストグラム。「10〜20分」「20〜30分」のような区間になる。"
+  },
+  {
+    scenario: "月別の欠席者数の推移を比べたい（4月・5月・6月・7月）。",
+    answer: "bar",
+    reason: "「4月」「5月」「6月」「7月」というカテゴリを比較するので棒グラフ。（時系列なら折れ線グラフも候補だが、今日は棒グラフで。）"
+  },
+  {
+    scenario: "学生のアルバイト時給が、800円台・900円台・1000円台・1100円台にどう分布しているかを見たい。",
+    answer: "hist",
+    reason: "時給という数値の分布を区間で見るのでヒストグラム。X軸は「800〜899円」「900〜999円」のような区間。"
+  }
+];
+
+let current = 0;
+let score = 0;
+let answered = false;
+const order = [...Array(questions.length).keys()];
+
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function showQuestion() {
+  answered = false;
+  const q = questions[order[current]];
+  document.getElementById("questionNum").textContent = `問 ${current + 1} / ${questions.length}`;
+  document.getElementById("scenarioText").textContent = q.scenario;
+  document.getElementById("progressFill").style.width = `${(current / questions.length) * 100}%`;
+
+  const btnBar = document.getElementById("btn-bar");
+  const btnHist = document.getElementById("btn-hist");
+  btnBar.className = "choice-btn";
+  btnHist.className = "choice-btn";
+  btnBar.disabled = false;
+  btnHist.disabled = false;
+
+  document.getElementById("feedback").style.display = "none";
+  document.getElementById("nextBtn").style.display = "none";
+}
+
+function answer(choice) {
+  if (answered) return;
+  answered = true;
+
+  const q = questions[order[current]];
+  const correct = choice === q.answer;
+  if (correct) score++;
+
+  const btnBar = document.getElementById("btn-bar");
+  const btnHist = document.getElementById("btn-hist");
+  btnBar.disabled = true;
+  btnHist.disabled = true;
+
+  if (choice === "bar") {
+    btnBar.className = "choice-btn " + (correct ? "correct" : "wrong");
+  } else {
+    btnHist.className = "choice-btn " + (correct ? "correct" : "wrong");
+  }
+
+  if (!correct) {
+    if (q.answer === "bar") btnBar.className = "choice-btn show-correct";
+    else btnHist.className = "choice-btn show-correct";
+  }
+
+  const fb = document.getElementById("feedback");
+  fb.className = "feedback " + (correct ? "correct" : "wrong");
+  fb.innerHTML = (correct ? "✅ 正解！" : "❌ 不正解") +
+    `<div class="reason">${q.reason}</div>`;
+  fb.style.display = "block";
+
+  document.getElementById("nextBtn").style.display = "block";
+  document.getElementById("nextBtn").textContent =
+    current + 1 < questions.length ? "次の問題 →" : "結果を見る";
+}
+
+function nextQuestion() {
+  current++;
+  if (current >= questions.length) {
+    showResult();
+  } else {
+    showQuestion();
+  }
+}
+
+function showResult() {
+  document.getElementById("quizCard").style.display = "none";
+  document.getElementById("progressFill").style.width = "100%";
+
+  const rs = document.getElementById("resultScreen");
+  rs.style.display = "block";
+  document.getElementById("scoreBig").textContent = `${score} / ${questions.length}`;
+  document.getElementById("scoreLabel").textContent = "正解数";
+
+  let comment = "";
+  const pct = score / questions.length;
+  if (pct >= 0.9) {
+    comment = "完璧！棒グラフとヒストグラムの違いをしっかり理解できています。";
+  } else if (pct >= 0.7) {
+    comment = "よくできました。あと少し。「X軸がカテゴリ名か数値の区間か」に注目してみてください。";
+  } else if (pct >= 0.5) {
+    comment = "半分正解。ヒント：棒グラフは「グループの比較」、ヒストグラムは「数値の分布」です。もう一度やってみましょう。";
+  } else {
+    comment = "まずは「棒グラフ＝比べる・ヒストグラム＝ばらつきを見る」を覚えてから、もう一度挑戦してみてください。";
+  }
+  document.getElementById("scoreComment").textContent = comment;
+}
+
+function restart() {
+  current = 0;
+  score = 0;
+  shuffle(order);
+  document.getElementById("quizCard").style.display = "block";
+  document.getElementById("resultScreen").style.display = "none";
+  showQuestion();
+}
+
+// Start
+shuffle(order);
+showQuestion();
+</script>
+</body>
+</html>
