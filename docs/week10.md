@@ -134,7 +134,7 @@ AIに「ヒストグラムを作って」と頼むと、**棒グラフを返し�
 
 棒グラフ vs ヒストグラム、どちらを使うか練習できます。
 
-**[グラフ選択ドリルを開く →](../graph-drill.html)**
+**[グラフ選択ドリルを開く →](https://aonoa68.github.io/joho-nyumon/graph-drill.html)**
 
 ---
 
