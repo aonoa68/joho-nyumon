@@ -259,6 +259,59 @@ function pieChart({title='', slices=[], w=155, h=125}) {
   return s;
 }
 
+// ─── 3D bar chart generator ──────────────────────────────────────────────────
+function barChart3D({title='', yMin=0, yMax=8, values=[], labels=[], w=155, h=125}) {
+  const pT=title?26:10, pL=30, pR=24, pB=28;
+  const cX=pL, cY=pT, cW=w-pL-pR, cH=h-pT-pB, cB=cY+cH;
+  const yRange=yMax-yMin, n=values.length;
+  const dx=11, dy=-8; // 3D depth offset
+
+  const barW=Math.floor(cW*0.26);
+  const gapW=Math.floor(cW*0.12);
+  const totalBW=n*barW+(n-1)*gapW;
+  const sx=cX+(cW-totalBW)/2;
+  const bX=i=>sx+i*(barW+gapW);
+  const bHt=v=>Math.max(1,((v-yMin)/yRange)*cH);
+  const bY=v=>cB-bHt(v);
+
+  const ff="Hiragino Kaku Gothic ProN,Meiryo,sans-serif";
+  let s=`<svg width="${w}" height="${h}" xmlns="http://www.w3.org/2000/svg">`;
+  s+=`<rect width="${w}" height="${h}" fill="#f0f0f8" rx="6" stroke="#e0e0e0" stroke-width="0.5"/>`;
+  if(title) s+=`<text x="${w/2}" y="17" text-anchor="middle" font-size="8" fill="#222" font-weight="bold" font-family="${ff}">${title}</text>`;
+
+  // Back wall (for 3D feel)
+  s+=`<polygon points="${cX},${cY} ${cX+dx},${cY+dy} ${cX+cW+dx},${cY+dy} ${cX+cW},${cY}" fill="#e4e8f8"/>`;
+  s+=`<polygon points="${cX},${cY} ${cX+dx},${cY+dy} ${cX+dx},${cB+dy} ${cX},${cB}" fill="#d8ddf0"/>`;
+
+  // Ground line
+  s+=`<line x1="${cX}" y1="${cB}" x2="${cX+cW+dx}" y2="${cB+dy}" stroke="#888" stroke-width="1"/>`;
+  // Y axis
+  s+=`<line x1="${cX}" y1="${cY}" x2="${cX}" y2="${cB}" stroke="#888" stroke-width="1"/>`;
+
+  // Y ticks
+  for(let i=0;i<=4;i++){
+    const val=yMin+yRange*i/4, y=cB-cH*i/4;
+    s+=`<line x1="${cX-3}" y1="${y}" x2="${cX}" y2="${y}" stroke="#888" stroke-width="1"/>`;
+    s+=`<text x="${cX-4}" y="${y+3}" text-anchor="end" font-size="7" fill="#666" font-family="sans-serif">${Number.isInteger(val)?val:val.toFixed(1)}</text>`;
+  }
+
+  const fc=['#4361ee','#e85d4a'], rc=['#243480','#8a2818'], tc=['#7a93ff','#f48070'];
+  values.forEach((v,i)=>{
+    const x=bX(i), bh=bHt(v), by=bY(v), x2=x+barW, cx=x+barW/2;
+    // right face
+    s+=`<polygon points="${x2},${by} ${x2+dx},${by+dy} ${x2+dx},${cB+dy} ${x2},${cB}" fill="${rc[i%rc.length]}"/>`;
+    // top face
+    s+=`<polygon points="${x},${by} ${x2},${by} ${x2+dx},${by+dy} ${x+dx},${by+dy}" fill="${tc[i%tc.length]}"/>`;
+    // front face
+    s+=`<rect x="${x}" y="${by}" width="${barW}" height="${bh}" fill="${fc[i%fc.length]}"/>`;
+    s+=`<text x="${cx}" y="${cB+14}" text-anchor="middle" font-size="8" fill="#444" font-family="${ff}">${labels[i]||''}</text>`;
+    if(bh>14) s+=`<text x="${cx}" y="${by-3}" text-anchor="middle" font-size="7" fill="#333" font-family="sans-serif">${v}</text>`;
+  });
+
+  s+=`</svg>`;
+  return s;
+}
+
 // ─── Questions ───────────────────────────────────────────────────────────────
 
 // Part 1: Choose 棒グラフ or ヒストグラム
@@ -376,6 +429,16 @@ const judgeQuestions = [
     reason: '円グラフは「全体を100%としたときの割合（内訳）」を表すものです。平均値を足しても「全体の何か」にはならないため、このグラフは意味をなしません。平均値の大きさを比較するには棒グラフを使います。',
     leftSvg: pieChart({title:'睡眠時間（平均）の円グラフ', slices:[{label:'朝食あり',value:6.8,color:'#4361ee'},{label:'朝食なし',value:6.1,color:'#e85d4a'}]}),
     rightSvg: barChart({title:'グループ別平均睡眠時間', yMin:0, yMax:8, values:[6.8,6.1], labels:['朝食あり','朝食なし'], gapped:true, yAxisLabel:'（時間）'})
+  },
+  {
+    type: 'judge',
+    questionText: '同じデータの棒グラフです。どちらが値を正確に読み取れますか？',
+    scenario: "朝食の有無と平均睡眠時間（朝食あり: 6.8時間、朝食なし: 6.1時間）",
+    answer: 'right',
+    ngPoint: '3Dグラフは値が正確に読み取れない',
+    reason: '3Dグラフは見た目は派手ですが、奥行き（遠近法）の影響でY軸の目盛りが正確に読めなくなります。「手前の棒が大きく見える」「奥の棒が隠れる」などの問題が生じます。レポートや分析では、シンプルな2D棒グラフを使いましょう。',
+    leftSvg:  barChart3D({title:'3D棒グラフ（NG）', yMin:0, yMax:8, values:[6.8,6.1], labels:['朝食あり','朝食なし']}),
+    rightSvg: barChart({title:'2D棒グラフ（OK）', yMin:0, yMax:8, values:[6.8,6.1], labels:['朝食あり','朝食なし'], gapped:true, yAxisLabel:'（時間）'})
   }
 ];
 
