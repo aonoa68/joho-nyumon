@@ -45,7 +45,7 @@
 | 第8回 | アンケート設計 | [余談：WebとHTML](week08-web-html.md) ／ [Colab演習ノート](https://colab.research.google.com/drive/1GSgHtj9yiGqYRclslQMWlQsNGMQ52ild?usp=sharing) |
 | 第9回 | データ整理・集計 | [授業資料](week09.md) ／ [余談：Excelと本の山](week09-honnoyama.md) |
 | 第10回 | データ可視化 | [授業資料](week10.md) |
-| 第12回 | 分析課題 | [授業資料](week12.md) |
+| 第12回 | 層別散布図 | [授業資料](week12.md) |
 | 第13回 | 最終レポート | [授業資料](week13.md) |
 | 第14回 | 振り返り | [授業資料](week14.md) |
 
