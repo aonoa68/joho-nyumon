@@ -48,6 +48,7 @@
 | 第12回 | 層別散布図 | [授業資料](week12.md) ／ [余談：シンプソンのパラドックス](week12-simpson.md) ／ [余談NotebookLM版](https://notebooklm.google.com/notebook/9ebb9a57-9c32-4229-9ee3-d989643232e7) |
 | 第13回 | 最終レポート | [授業資料](week13.md) ／ [余談：文章もデータになる（動画）](week13-textmining.md) |
 | 第14回 | 振り返り | [授業資料](week14.md) |
+| 補足 | あと少しだけ | [複合グラフ・難読漢字・検索の裏取り](supplement-skills.md) |
 
 ---
 
