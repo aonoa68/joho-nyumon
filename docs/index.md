@@ -29,6 +29,9 @@
 | 第7回 | [データ読解と記述統計](https://notebooklm.google.com/notebook/d366a546-38ce-482f-935c-1619d637b381) ／ [情報の作法はいつ更新されるか](https://notebooklm.google.com/notebook/3efc2e93-c569-4fef-b11a-68bc09f63554) |
 | 第8回 | [WebとHTML・アンケート設計](https://notebooklm.google.com/notebook/e85074f4-f8ad-440f-83bf-a6c834237a4a) |
 | 第9回 | [Excelと本の山（余談）](https://notebooklm.google.com/notebook/2819d253-1307-4ce7-bdce-d8df3be0da64) |
+| 第10回 | [グラフは嘘をつく（余談）](https://notebooklm.google.com/notebook/df55a6ca-1faf-4bf3-884c-a82cb02f9d41) |
+| 第12回 | [シンプソンのパラドックス（余談）](https://notebooklm.google.com/notebook/9ebb9a57-9c32-4229-9ee3-d989643232e7) |
+| 第13回 | [音声で振り返る](https://notebooklm.google.com/notebook/908e20ce-fe8c-4ff1-b112-efd0ce5f75fe) ／ [テキストマイニングと生成AI（余談）](https://notebooklm.google.com/notebook/57391cc4-18a8-4092-bae8-4726b4342010) |
 
 ---
 
